@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using EmmTi.KenticoCloudConsumer.EnhancedDeliver.Helpers;
+﻿using EmmTi.KenticoCloudConsumer.EnhancedDeliver.Helpers;
 using EmmTi.KenticoCloudConsumer.EnhancedDeliver.Interfaces;
 using KenticoCloud.Deliver;
+using System.Collections.Generic;
 
 namespace EmmTi.KenticoCloudConsumer.EnhancedDeliver.Models
 {
@@ -12,12 +12,12 @@ namespace EmmTi.KenticoCloudConsumer.EnhancedDeliver.Models
     public class BaseContentItemViewModel : IKenticoDeliverViewModel
     {
         /// <summary>
-        /// Gets or sets the URL.
+        /// Gets or sets the maximum depth for recursive functions.
         /// </summary>
         /// <value>
-        /// The URL.
+        /// The maximum depth recursive functions.
         /// </value>
-        public string Url { get; set; }
+        public int MaxDepth { get; set; } = 2;
 
         /// <summary>
         /// Gets or sets the system.
@@ -28,12 +28,27 @@ namespace EmmTi.KenticoCloudConsumer.EnhancedDeliver.Models
         public KenticoCloud.Deliver.System System { get; set; }
 
         /// <summary>
+        /// Gets or sets the URL.
+        /// </summary>
+        /// <value>
+        /// The URL.
+        /// </value>
+        public string Url { get; set; }
+
+        /// <summary>
         /// Maps the content for the current type.
         /// </summary>
         /// <param name="content">The content.</param>
-        public void MapContent(ContentItem content)
+        /// <param name="currentDepth">The current depth of this item in a recursive tree</param>
+        public void MapContent(ContentItem content, int currentDepth = 0)
         {
+            if (currentDepth > MaxDepth)
+            {
+                return;
+            }
+
             MapCommonContentFields(content);
+            MapContentForType(content, currentDepth);
             MapContentForType(content);
         }
 
@@ -41,9 +56,26 @@ namespace EmmTi.KenticoCloudConsumer.EnhancedDeliver.Models
         /// Maps the content list for the current type.
         /// </summary>
         /// <param name="contentList">The content list.</param>
-        public void MapContentList(List<ContentItem> contentList)
+        /// <param name="currentDepth">The current depth of this item in a recursive tree</param>
+        public void MapContentList(List<ContentItem> contentList, int currentDepth = 0)
         {
+            if (currentDepth > MaxDepth)
+            {
+                return;
+            }
+
+            MapContentListForType(contentList, currentDepth);
             MapContentListForType(contentList);
+        }
+
+        /// <summary>
+        /// Maps the common content fields.
+        /// </summary>
+        /// <param name="content">The content.</param>
+        protected virtual void MapCommonContentFields(ContentItem content)
+        {
+            System = content.System;
+            Url = UrlHelper.GetFriendlyUrl(content.System);
         }
 
         /// <summary>
@@ -52,6 +84,16 @@ namespace EmmTi.KenticoCloudConsumer.EnhancedDeliver.Models
         /// <param name="content">The content.</param>
         /// <remarks>Should be overridden by derived types</remarks>
         protected virtual void MapContentForType(ContentItem content)
+        {
+        }
+
+        /// <summary>
+        /// Maps the content for the current type.
+        /// </summary>
+        /// <param name="content">The content.</param>
+        /// <param name="currentDepth">The current depth of this item in a recursive tree</param>
+        /// <remarks>Should be overridden by derived types (specially which contain themselves as modular elements)</remarks>
+        protected virtual void MapContentForType(ContentItem content, int currentDepth)
         {
         }
 
@@ -65,13 +107,13 @@ namespace EmmTi.KenticoCloudConsumer.EnhancedDeliver.Models
         }
 
         /// <summary>
-        /// Maps the common content fields.
+        /// Maps the content list for the current type.
         /// </summary>
-        /// <param name="content">The content.</param>
-        protected virtual void MapCommonContentFields(ContentItem content)
+        /// <param name="contentList">The content list.</param>
+        /// <param name="currentDepth">The current depth of this item in a recursive tree</param>
+        /// <remarks>Should be overridden by derived types</remarks>
+        protected virtual void MapContentListForType(List<ContentItem> contentList, int currentDepth)
         {
-            System = content.System;
-            Url = UrlHelper.GetFriendlyUrl(content.System);
         }
     }
 }

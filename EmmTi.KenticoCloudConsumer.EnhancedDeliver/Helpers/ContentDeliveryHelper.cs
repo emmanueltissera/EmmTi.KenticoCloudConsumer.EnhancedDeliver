@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Text;
-using EmmTi.KenticoCloudConsumer.EnhancedDeliver.Interfaces;
+﻿using EmmTi.KenticoCloudConsumer.EnhancedDeliver.Interfaces;
 using KenticoCloud.Deliver;
+using System.Collections.Generic;
+using System.Text;
 
 namespace EmmTi.KenticoCloudConsumer.EnhancedDeliver.Helpers
 {
@@ -15,15 +15,16 @@ namespace EmmTi.KenticoCloudConsumer.EnhancedDeliver.Helpers
         /// </summary>
         /// <typeparam name="T">Type of IKenticoDeliverModel</typeparam>
         /// <param name="items">The items.</param>
+        /// <param name="currentDepth">The current depth of this item in a recursive tree</param>
         /// <returns>A List of Modular content</returns>
-        public static List<T> GetListOfModularContent<T>(this IEnumerable<ContentItem> items) where T : IKenticoDeliverViewModel, new()
+        public static List<T> GetListOfModularContent<T>(this IEnumerable<ContentItem> items, int currentDepth = 0) where T : IKenticoDeliverViewModel, new()
         {
             var modularList = new List<T>();
 
             foreach (var module in items)
             {
                 var model = new T();
-                model.MapContent(module);
+                model.MapContent(module, currentDepth);
                 modularList.Add(model);
             }
 

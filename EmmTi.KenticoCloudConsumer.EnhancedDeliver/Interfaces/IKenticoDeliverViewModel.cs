@@ -28,12 +28,14 @@ namespace EmmTi.KenticoCloudConsumer.EnhancedDeliver.Interfaces
         /// Maps the content.
         /// </summary>
         /// <param name="content">The content.</param>
-        void MapContent(ContentItem content);
+        /// <param name="currentDepth">The current depth of this item in a recursive tree</param>
+        void MapContent(ContentItem content, int currentDepth = 0);
 
         /// <summary>
         /// Maps the content list.
         /// </summary>
         /// <param name="contentList">The content list.</param>
-        void MapContentList(List<ContentItem> contentList);
+        /// <param name="currentDepth">The current depth of this item in a recursive tree</param>
+        void MapContentList(List<ContentItem> contentList, int currentDepth = 0);
     }
 }
