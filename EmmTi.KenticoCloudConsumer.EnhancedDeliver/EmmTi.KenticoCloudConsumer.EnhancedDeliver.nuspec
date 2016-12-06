@@ -13,6 +13,6 @@
     <description>$description$</description>
     <releaseNotes>First beta release.</releaseNotes>
     <copyright>Copyright 2016</copyright>
-    <tags>kentico, kentico cloud, aspnetmvc, mvc, aspnet, consumer, caching, friendly urls</tags>
+    <tags>kentico, kenticocloud, aspnetmvc, mvc, aspnet, consumer, caching, friendlyurls, strongtypes</tags>
   </metadata>
 </package>
