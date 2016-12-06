@@ -17,11 +17,12 @@ Enhanced Deliver Client built on top of [KenticoCloud.Deliver SDK](https://githu
 5. Create public properties for other Content Elements
 6. Override MapContentForType method and map each field - [See example]( https://github.com/emmanueltissera/EmmTi.KenticoCloudConsumer.EnhancedDeliver/blob/master/EmmTi.KenticoCloudConsumer.EnhancedDeliver/Models/SampleViewModel.cs)
 ```C#
+using EmmTi.KenticoCloudConsumer.EnhancedDeliver.Helpers;
+using KenticoCloud.Deliver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using EmmTi.KenticoCloudConsumer.EnhancedDeliver.Helpers;
-using KenticoCloud.Deliver;
+using System.Web;
 
 namespace EmmTi.KenticoCloudConsumer.EnhancedDeliver.Models
 {
@@ -53,3 +54,39 @@ namespace EmmTi.KenticoCloudConsumer.EnhancedDeliver.Models
     }
 }
 ```
+7. In your Controller return the new ViewModel using the DeliveryFactory
+```C#
+	public async Task<ActionResult> Index()
+        {
+            var response = await DeliverClientFactory<SampleViewModel>.GetItemAsync(SampleViewModel.ItemCodeName);
+            return View(response);
+        }
+```
+8. Use the strongly typed model in your ViewModel
+```html
+@model EmmTi.KenticoCloudConsumer.EnhancedDeliver.Models.SampleViewModel
+
+<div class="article-tile article-tile-large">
+    <div class="col-md-12 col-lg-6">
+        <a href="@Url.Action("Show", "Articles", new { id = Model.System.Codename })">
+            <img src="@Model.TeaserImage.Url" class="article-tile-image" alt="@Model.System.Name" />
+        </a>
+    </div>
+    <div class="col-md-12 col-lg-6">
+        <div class="article-tile-date">
+            @Model.PostDate.ToString("m")
+        </div>
+        <div class="article-tile-content">
+            <h2>
+                <a href="@Url.Action("Show", "Articles", new { id = Model.System.Codename })">@Model.System.Name</a>
+            </h2>
+            <p class="article-tile-text lead-paragraph">
+                @Model.Summary
+            </p>
+        </div>
+    </div>
+</div>
+```
+
+## Full Sample site
+See an [enhanced version of the Dancing Goat Sample site](https://github.com/emmanueltissera/Deliver-Dancing-Goat-Enhanced) for a working example
