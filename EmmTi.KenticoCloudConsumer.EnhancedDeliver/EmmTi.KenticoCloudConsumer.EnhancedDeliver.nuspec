@@ -12,7 +12,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>This package is still in beta and may have breaking changes in future releases.</releaseNotes>
-    <copyright>Copyright 2016</copyright>
+    <copyright>$copyright$</copyright>
     <tags>kentico, kenticocloud, aspnetmvc, mvc, aspnet, consumer, caching, friendlyurls, strongtypes</tags>
   </metadata>
 </package>
