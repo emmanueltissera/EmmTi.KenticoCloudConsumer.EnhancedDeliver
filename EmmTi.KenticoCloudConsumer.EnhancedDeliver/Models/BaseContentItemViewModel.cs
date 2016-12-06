@@ -49,7 +49,6 @@ namespace EmmTi.KenticoCloudConsumer.EnhancedDeliver.Models
 
             MapCommonContentFields(content);
             MapContentForType(content, currentDepth);
-            MapContentForType(content);
         }
 
         /// <summary>
@@ -65,7 +64,6 @@ namespace EmmTi.KenticoCloudConsumer.EnhancedDeliver.Models
             }
 
             MapContentListForType(contentList, currentDepth);
-            MapContentListForType(contentList);
         }
 
         /// <summary>
@@ -82,30 +80,12 @@ namespace EmmTi.KenticoCloudConsumer.EnhancedDeliver.Models
         /// Maps the content for the current type.
         /// </summary>
         /// <param name="content">The content.</param>
-        /// <remarks>Should be overridden by derived types</remarks>
-        protected virtual void MapContentForType(ContentItem content)
-        {
-        }
-
-        /// <summary>
-        /// Maps the content for the current type.
-        /// </summary>
-        /// <param name="content">The content.</param>
         /// <param name="currentDepth">The current depth of this item in a recursive tree</param>
-        /// <remarks>Should be overridden by derived types (specially which contain themselves as modular elements)</remarks>
+        /// <remarks>Should be overridden by derived types</remarks>
         protected virtual void MapContentForType(ContentItem content, int currentDepth)
         {
         }
-
-        /// <summary>
-        /// Maps the content list for the current type.
-        /// </summary>
-        /// <param name="contentList">The content list.</param>
-        /// <remarks>Should be overridden by derived types</remarks>
-        protected virtual void MapContentListForType(List<ContentItem> contentList)
-        {
-        }
-
+        
         /// <summary>
         /// Maps the content list for the current type.
         /// </summary>

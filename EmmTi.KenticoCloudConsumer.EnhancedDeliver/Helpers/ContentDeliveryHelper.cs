@@ -64,5 +64,29 @@ namespace EmmTi.KenticoCloudConsumer.EnhancedDeliver.Helpers
 
             return filterBuilder.ToString().ToLower();
         }
+
+        /// <summary>
+        /// Gets the taxonomy items.
+        /// </summary>
+        /// <param name="content">The content.</param>
+        /// <param name="elementCode">The element code.</param>
+        /// <returns>A Dictionary of taxonomy items</returns>
+        public static Dictionary<string, string> GetTaxonomyItems(this ContentItem content, string elementCode)
+        {
+            var element = content.Elements[elementCode];
+            var taxonomyList = new Dictionary<string, string>();
+
+            if (element == null || element.value == null)
+            {
+                return taxonomyList;
+            }
+
+            foreach (var item in element.value)
+            {
+                taxonomyList.Add(item.codename.ToString(), item.name.ToString());
+            }
+
+            return taxonomyList;
+        }
     }
 }

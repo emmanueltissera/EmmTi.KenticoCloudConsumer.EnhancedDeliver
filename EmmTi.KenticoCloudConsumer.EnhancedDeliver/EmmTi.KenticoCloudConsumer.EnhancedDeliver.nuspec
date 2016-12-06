@@ -7,11 +7,11 @@
     <authors>$author$</authors>
     <owners>$author$</owners>
     <licenseUrl>https://raw.githubusercontent.com/emmanueltissera/EmmTi.KenticoCloudConsumer.EnhancedDeliver/master/LICENSE</licenseUrl>
-    <projectUrl>https://raw.githubusercontent.com/emmanueltissera/EmmTi.KenticoCloudConsumer.EnhancedDeliver</projectUrl>
+    <projectUrl>https://github.com/emmanueltissera/EmmTi.KenticoCloudConsumer.EnhancedDeliver</projectUrl>
     <iconUrl>https://raw.githubusercontent.com/emmanueltissera/EmmTi.KenticoCloudConsumer.EnhancedDeliver/master/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>First beta release.</releaseNotes>
+    <releaseNotes>This package is still in beta and may have breaking changes in future releases.</releaseNotes>
     <copyright>Copyright 2016</copyright>
     <tags>kentico, kenticocloud, aspnetmvc, mvc, aspnet, consumer, caching, friendlyurls, strongtypes</tags>
   </metadata>

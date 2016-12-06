@@ -60,6 +60,7 @@
     <Compile Include="Helpers\ContentDeliveryHelper.cs" />
     <Compile Include="Helpers\UrlHelper.cs" />
     <Compile Include="Interfaces\IKenticoDeliverViewModel.cs" />
+    <Content Include="Models\SampleViewModel.cs" />
     <Compile Include="Models\BaseContentItemViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
