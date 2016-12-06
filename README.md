@@ -3,19 +3,28 @@
 ## SUMMARY
 Enhanced Deliver Client built on top of [KenticoCloud.Deliver SDK](https://github.com/Kentico/Deliver-.NET-SDK). Strong types, Caching and SEO Friendly URLs out of the box.
 
+## NUGET PACKAGE
+This project is available as a nuget package at https://www.nuget.org/packages/EmmTi.KenticoCloudConsumer.EnhancedDeliver/
+To install EmmTi.KenticoCloudConsumer.EnhancedDeliver, run the following command in the Package Manager Console
+```commandline
+PM > Install-Package EmmTi.KenticoCloudConsumer.EnhancedDeliver
+```
+
 ## PREREQUISITIES
 1. Kentico Cloud Account and an MVC Application
 
 ## Quick Setup Guide
+### Initial Setup
 1. Follow the steps in the [Kentico Dancing Goat Example](https://github.com/Kentico/Deliver-Dancing-Goat-.NET-MVC/blob/master/README.md) to setup a sample site.
 2. Add the following config setting in appsettings of web.config. Tweak the cache time as you see fit.
 ```XML
  <add key="DeliveryContentCacheTimeSeconds" value="300"/> 
 ```
-3. Create a new ViewModel and inherit from BaseContentItemViewModel
-4. Add a ItemCodeName constant with the code name for the Kentico Content Type
-5. Create public properties for other Content Elements
-6. Override MapContentForType method and map each field - [See example]( https://github.com/emmanueltissera/EmmTi.KenticoCloudConsumer.EnhancedDeliver/blob/master/EmmTi.KenticoCloudConsumer.EnhancedDeliver/Models/SampleViewModel.cs)
+### Creating the View Model
+1. Create a new ViewModel and inherit from BaseContentItemViewModel
+2. Add a ItemCodeName constant with the code name for the Kentico Content Type
+3. Create public properties for other Content Elements
+4. Override MapContentForType method and map each field - [See example]( https://github.com/emmanueltissera/EmmTi.KenticoCloudConsumer.EnhancedDeliver/blob/master/EmmTi.KenticoCloudConsumer.EnhancedDeliver/Models/SampleViewModel.cs)
 ```C#
 using EmmTi.KenticoCloudConsumer.EnhancedDeliver.Helpers;
 using KenticoCloud.Deliver;
@@ -54,7 +63,8 @@ namespace EmmTi.KenticoCloudConsumer.EnhancedDeliver.Models
     }
 }
 ```
-7. In your Controller return the new ViewModel using the DeliveryFactory
+### The Controller
+In your Controller return the new ViewModel using the DeliveryFactory
 ```C#
 	public async Task<ActionResult> Index()
         {
@@ -62,7 +72,8 @@ namespace EmmTi.KenticoCloudConsumer.EnhancedDeliver.Models
             return View(response);
         }
 ```
-8. Use the strongly typed model in your ViewModel
+### The View
+Use the strongly typed model in your ViewModel
 ```html
 @model EmmTi.KenticoCloudConsumer.EnhancedDeliver.Models.SampleViewModel
 
