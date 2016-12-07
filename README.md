@@ -73,7 +73,7 @@ In your Controller return the new ViewModel using the DeliveryFactory
         }
 ```
 ### The View
-Use the strongly typed model in your ViewModel
+Use the strongly typed model in your View
 ```html
 @model EmmTi.KenticoCloudConsumer.EnhancedDeliver.Models.SampleViewModel
 
