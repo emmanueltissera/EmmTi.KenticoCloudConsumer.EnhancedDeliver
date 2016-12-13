@@ -9,6 +9,14 @@ namespace EmmTi.KenticoCloudConsumer.EnhancedDeliver.Interfaces
     public interface IKenticoDeliverViewModel
     {
         /// <summary>
+        /// Gets or sets the parent path.
+        /// </summary>
+        /// <value>
+        /// The parent path.
+        /// </value>
+        string ParentPath { get; set; }
+
+        /// <summary>
         /// Gets or sets the system.
         /// </summary>
         /// <value>

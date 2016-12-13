@@ -26,6 +26,16 @@ namespace EmmTi.KenticoCloudConsumer.EnhancedDeliver.Factories
         }
 
         /// <summary>
+        /// Synchronously gets multiple items.
+        /// </summary>
+        /// <param name="parameters">The parameters.</param>
+        /// <returns>Cached items of Type T</returns>
+        public static T GetItems(IEnumerable<IFilter> parameters = null)
+        {
+            return Task.Run(() => GetCachedItemsAsync(parameters)).Result;
+        }
+
+        /// <summary>
         ///  Asynchronously gets a single item.
         /// </summary>
         /// <param name="itemCodename">The item codename.</param>

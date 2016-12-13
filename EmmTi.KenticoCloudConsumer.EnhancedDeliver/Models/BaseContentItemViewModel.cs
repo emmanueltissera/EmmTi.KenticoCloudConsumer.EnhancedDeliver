@@ -20,6 +20,14 @@ namespace EmmTi.KenticoCloudConsumer.EnhancedDeliver.Models
         public int MaxDepth { get; set; } = 2;
 
         /// <summary>
+        /// Gets or sets the parent path.
+        /// </summary>
+        /// <value>
+        /// The parent path.
+        /// </value>
+        public string ParentPath { get; set; }
+
+        /// <summary>
         /// Gets or sets the system.
         /// </summary>
         /// <value>
@@ -42,7 +50,7 @@ namespace EmmTi.KenticoCloudConsumer.EnhancedDeliver.Models
         /// <param name="currentDepth">The current depth of this item in a recursive tree</param>
         public void MapContent(ContentItem content, int currentDepth = 0)
         {
-            if (currentDepth > MaxDepth)
+            if (currentDepth > MaxDepth || content.Elements == null)
             {
                 return;
             }
@@ -58,7 +66,7 @@ namespace EmmTi.KenticoCloudConsumer.EnhancedDeliver.Models
         /// <param name="currentDepth">The current depth of this item in a recursive tree</param>
         public void MapContentList(List<ContentItem> contentList, int currentDepth = 0)
         {
-            if (currentDepth > MaxDepth)
+            if (currentDepth > MaxDepth || contentList == null || contentList.Count == 0)
             {
                 return;
             }
@@ -72,6 +80,7 @@ namespace EmmTi.KenticoCloudConsumer.EnhancedDeliver.Models
         /// <param name="content">The content.</param>
         protected virtual void MapCommonContentFields(ContentItem content)
         {
+            ParentPath = UrlHelper.GetFriendlyParentPath(content.System);
             System = content.System;
             Url = UrlHelper.GetFriendlyUrl(content.System);
         }

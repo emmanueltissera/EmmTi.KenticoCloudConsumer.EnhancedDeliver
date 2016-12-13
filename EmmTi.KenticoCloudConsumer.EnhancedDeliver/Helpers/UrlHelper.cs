@@ -1,10 +1,37 @@
 ﻿namespace EmmTi.KenticoCloudConsumer.EnhancedDeliver.Helpers
 {
     /// <summary>
-    /// Helps with Friendly URLs 
+    /// Helps with Friendly URLs
     /// </summary>
     public static class UrlHelper
     {
+        /// <summary>
+        /// Gets the friendly parent path.
+        /// </summary>
+        /// <param name="system">The system.</param>
+        /// <returns></returns>
+        public static string GetFriendlyParentPath(KenticoCloud.Deliver.System system)
+        {
+            var url = string.Empty;
+
+            if (system == null)
+            {
+                return url;
+            }
+
+            if (system.SitemapLocations.Count > 0)
+            {
+                url = $"/{TransformPath(system.SitemapLocations[0])}";
+            }
+
+            if (url == "/root")
+            {
+                url = string.Empty;
+            }
+
+            return url;
+        }
+
         /// <summary>
         /// Gets the friendly URL.
         /// </summary>
@@ -19,31 +46,16 @@
                 return url;
             }
 
-            if (system.SitemapLocations.Count > 0)
-            {
-                url = $"/{system.SitemapLocations[0]}";
-            }
+            url = GetFriendlyParentPath(system);
 
-            if (url == "/root" & system.Codename == "home")
+            if (url == "/" & system.Codename == "home")
             {
                 return "/";
             }
 
-            if (url == "/root")
-            {
-                url = string.Empty;
-            }
+            var codeName = TransformPath(system.Codename);
 
-            var codeName = system.Codename.Replace("_", "-");
-
-            if (codeName.StartsWith("n") && char.IsNumber(codeName, 1))
-            {
-                codeName = codeName.TrimStart('n');
-            }
-
-            url = $"{url}/{codeName}/";
-
-            return url;
+            return string.IsNullOrEmpty(url) ? $"{codeName}/" : $"{url}/{codeName}/";
         }
 
         /// <summary>
@@ -64,6 +76,22 @@
             }
 
             return url.Replace("-", "_");
+        }
+
+        /// <summary>
+        /// Transforms the path.
+        /// </summary>
+        /// <param name="codeName">Name of the code.</param>
+        /// <returns>An SEO friendly path</returns>
+        private static string TransformPath(string codeName)
+        {
+            codeName = codeName.Replace("_", "-");
+
+            if (codeName.StartsWith("n") && char.IsNumber(codeName, 1))
+            {
+                codeName = codeName.TrimStart('n');
+            }
+            return codeName;
         }
     }
 }
