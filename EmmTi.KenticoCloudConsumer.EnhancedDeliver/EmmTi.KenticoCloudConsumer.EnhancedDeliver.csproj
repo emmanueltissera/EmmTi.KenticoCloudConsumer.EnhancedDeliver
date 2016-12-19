@@ -90,11 +90,12 @@
     <Compile Include="Helpers\UrlHelper.cs" />
     <Compile Include="Interfaces\IKenticoDeliverViewModel.cs" />
     <Compile Include="Models\BaseItemCollectionViewModel.cs" />
+    <Compile Include="Models\NavigationItemViewModel.cs" />
+    <Compile Include="Models\NavigationViewModel.cs" />
     <Compile Include="Routing\CmsPageRoute.cs" />
     <Compile Include="Routing\CmsRoutingEngine.cs" />
     <Compile Include="Routing\CmsSystemTypeRoute.cs" />
-    <Compile Include="Routing\IRoutingEngine.cs" />
-    <Compile Include="Routing\RouteFactory.cs" />
+    <Compile Include="Routing\CmsRoutingFactory.cs" />
     <None Include="Models\SampleViewModel.cs" />
     <Compile Include="Models\BaseContentItemViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
